@@ -1,0 +1,55 @@
+import { Router } from 'express';
+import authRoutes from '../modules/auth/auth.route';
+import userRoutes from '../modules/user/user.route';
+import tenantRoutes from '../modules/tenant/tenant.route';
+import propertyRoutes from '../modules/property/property.route';
+import taskRoutes from '../modules/task/task.route';
+import contactRoutes from '../modules/contact/contact.route';
+import maintenanceRequestRoutes from '../modules/maintenance-request/maintenance-request.route';
+import monthlyBillRoutes from '../modules/monthly-bill/monthly-bill.route';
+import complaintRoutes from '../modules/complaint/complaint.route';
+import propertyDocumentRoutes from '../modules/property-document/property-document.route';
+import globalDocumentRoutes from '../modules/property-document/global-document.route';
+import tenantRentPaymentRoutes from '../modules/rent-payment/tenant-rent-payment.route';
+import landlordRentPaymentRoutes from '../modules/rent-payment/landlord-rent-payment.route';
+import landlordDashboardRoutes from '../modules/landlord-dashboard/landlord-dashboard.route';
+import chatRoutes from '../modules/chat/chat.route';
+import marketplaceRoutes from '../modules/marketplace/marketplace.route';
+import teamRoutes from '../modules/team/team.route';
+import billingRoutes from '../modules/billing/billing.route';
+import savedCalculationRoutes from '../modules/saved-calculation/saved-calculation.route';
+import stampDutyRoutes from '../modules/stamp-duty/stamp-duty.route';
+import aiRoutes from '../modules/ai/ai.route';
+import ownershipEntityRoutes from '../modules/ownership-entity/ownership-entity.route';
+import propertyAlertRoutes from '../modules/property-alert/property-alert.route';
+import projectRoutes from '../modules/project/project.route';
+
+const router = Router();
+
+router.use('/property-alerts', propertyAlertRoutes);
+
+router.use('/auth', authRoutes);
+router.use('/users', userRoutes);
+router.use('/tenants/rent-payments', tenantRentPaymentRoutes);
+router.use('/tenants', tenantRoutes);
+router.use('/properties', propertyRoutes);
+router.use('/tasks', taskRoutes);
+router.use('/contacts', contactRoutes);
+router.use('/maintenance-requests', maintenanceRequestRoutes);
+router.use('/monthly-bills', monthlyBillRoutes);
+router.use('/complaints', complaintRoutes);
+router.use('/documents', globalDocumentRoutes);
+router.use('/properties/:propertyId/documents', propertyDocumentRoutes);
+router.use('/landlord/rent-payments', landlordRentPaymentRoutes);
+router.use('/landlord', landlordDashboardRoutes);
+router.use('/chat', chatRoutes);
+router.use('/marketplace', marketplaceRoutes);
+router.use('/team', teamRoutes);
+router.use('/billing', billingRoutes);
+router.use('/calculators', savedCalculationRoutes);
+router.use('/stamp-duty', stampDutyRoutes);
+router.use('/ai', aiRoutes);
+router.use('/ownership-entities', ownershipEntityRoutes);
+router.use('/projects', projectRoutes);
+
+export default router;

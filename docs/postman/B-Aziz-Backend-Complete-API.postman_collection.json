@@ -1,0 +1,5526 @@
+{
+  "info": {
+    "_postman_id": "b7c1f4d2-7e28-4a8e-a6d9-baziz-complete",
+    "name": "B Aziz Backend - Complete API",
+    "description": "Complete Postman collection generated from the B Aziz backend routes. Set apiBase and accessToken in the environment before running protected requests.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "if (!pm.environment.get('apiBase')) pm.environment.set('apiBase', 'http://localhost:5000/api/v1');"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "00 - System",
+      "item": [
+        {
+          "name": "Health",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/health",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Health Live",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/health/live",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "health",
+                "live"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Health Ready",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/health/ready",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "health",
+                "ready"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Metrics",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{rootBase}}/metrics",
+              "host": [
+                "{{rootBase}}"
+              ],
+              "path": [
+                "metrics"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Dev Payment Config",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/dev/payment-config",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "dev",
+                "payment-config"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "01 - Authentication Flow",
+      "item": [
+        {
+          "name": "Landlord Sign Up",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Postman Landlord\",\n  \"email\": \"{{landlordEmail}}\",\n  \"password\": \"{{landlordPassword}}\",\n  \"confirmPassword\": \"{{landlordPassword}}\",\n  \"role\": \"landlord\",\n  \"termsAccepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/auth/signup",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "auth",
+                "signup"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Tenant Sign Up",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Postman Tenant\",\n  \"email\": \"{{tenantEmail}}\",\n  \"password\": \"{{tenantPassword}}\",\n  \"confirmPassword\": \"{{tenantPassword}}\",\n  \"role\": \"tenant\",\n  \"termsAccepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/auth/signup",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "auth",
+                "signup"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Verify Email OTP",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{landlordEmail}}\",\n  \"otp\": \"{{otp}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/auth/verify-email",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "auth",
+                "verify-email"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Resend Verification OTP",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{landlordEmail}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/auth/resend-otp",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "auth",
+                "resend-otp"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Landlord Sign In",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Signin success', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  const data = body.data || {};",
+                  "  const accessToken = data.accessToken || data.token || (data.tokens && data.tokens.accessToken);",
+                  "  const refreshToken = data.refreshToken || (data.tokens && data.tokens.refreshToken);",
+                  "  if (accessToken) pm.environment.set('accessToken', accessToken);",
+                  "  if (refreshToken) pm.environment.set('refreshToken', refreshToken);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{landlordEmail}}\",\n  \"password\": \"{{landlordPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/auth/signin",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "auth",
+                "signin"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Tenant Sign In",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Signin success', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  const data = body.data || {};",
+                  "  const accessToken = data.accessToken || data.token || (data.tokens && data.tokens.accessToken);",
+                  "  const refreshToken = data.refreshToken || (data.tokens && data.tokens.refreshToken);",
+                  "  if (accessToken) pm.environment.set('accessToken', accessToken);",
+                  "  if (refreshToken) pm.environment.set('refreshToken', refreshToken);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{tenantEmail}}\",\n  \"password\": \"{{tenantPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/auth/signin",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "auth",
+                "signin"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{landlordEmail}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/auth/forgot-password",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "auth",
+                "forgot-password"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Verify Password-reset OTP",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{landlordEmail}}\",\n  \"otp\": \"{{otp}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/auth/verify-otp",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "auth",
+                "verify-otp"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"newPassword\": \"{{landlordPassword}}\",\n  \"confirmPassword\": \"{{landlordPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/auth/reset-password",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "auth",
+                "reset-password"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oldPassword\": \"{{landlordPassword}}\",\n  \"newPassword\": \"{{landlordPassword}}\",\n  \"confirmPassword\": \"{{landlordPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/auth/change-password",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "auth",
+                "change-password"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Signin success', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  const data = body.data || {};",
+                  "  const accessToken = data.accessToken || data.token || (data.tokens && data.tokens.accessToken);",
+                  "  const refreshToken = data.refreshToken || (data.tokens && data.tokens.refreshToken);",
+                  "  if (accessToken) pm.environment.set('accessToken', accessToken);",
+                  "  if (refreshToken) pm.environment.set('refreshToken', refreshToken);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/auth/refresh-token",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "auth",
+                "refresh-token"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Current Auth User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/auth/me",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "auth",
+                "me"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/auth/logout",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 - Users & Profile",
+      "item": [
+        {
+          "name": "Get My Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/users/me",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "users",
+                "me"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "profilePhoto",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "firstName",
+                  "value": "Postman",
+                  "type": "text"
+                },
+                {
+                  "key": "lastName",
+                  "value": "User",
+                  "type": "text"
+                },
+                {
+                  "key": "phone",
+                  "value": "+447700900123",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{apiBase}}/users/me",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "users",
+                "me"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Settings",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"language\": \"en\",\n  \"currency\": \"GBP\",\n  \"timezone\": \"Europe/London\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/users/me/settings",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "users",
+                "me",
+                "settings"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Notification Preferences",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": true,\n  \"push\": true,\n  \"sms\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/users/me/notifications",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "users",
+                "me",
+                "notifications"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Remove Avatar",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/users/me/avatar",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "users",
+                "me",
+                "avatar"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Change Profile Password",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oldPassword\": \"{{landlordPassword}}\",\n  \"newPassword\": \"{{landlordPassword}}\",\n  \"confirmPassword\": \"{{landlordPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/users/me/password",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "users",
+                "me",
+                "password"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Deactivate Profile",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/users/me/profile",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "users",
+                "me",
+                "profile"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete My Data",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/users/me/data",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "users",
+                "me",
+                "data"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Admin List Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/users?page=1&limit=10",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "users?page=1&limit=10"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Admin Get User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/users/{{userId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "users",
+                "{{userId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Admin Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/users/{{userId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "users",
+                "{{userId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 - Ownership Entities",
+      "item": [
+        {
+          "name": "Create Personal Portfolio",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Ownership entity saved', function () {",
+                  "  pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "  const body = pm.response.json();",
+                  "  const data = body.data;",
+                  "  const entity = Array.isArray(data) ? data[0] : data;",
+                  "  const id = entity && (entity.id || entity._id);",
+                  "  if (id) pm.environment.set('ownershipEntityId', id);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Personal Portfolio\",\n  \"type\": \"personal\",\n  \"description\": \"Default personal property portfolio\",\n  \"taxReference\": \"TX-2026-00001\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/ownership-entities",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "ownership-entities"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Ownership Entities",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Ownership entity saved', function () {",
+                  "  pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "  const body = pm.response.json();",
+                  "  const data = body.data;",
+                  "  const entity = Array.isArray(data) ? data[0] : data;",
+                  "  const id = entity && (entity.id || entity._id);",
+                  "  if (id) pm.environment.set('ownershipEntityId', id);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/ownership-entities",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "ownership-entities"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Ownership Entity",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/ownership-entities/{{ownershipEntityId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "ownership-entities",
+                "{{ownershipEntityId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Ownership Entity",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Personal Portfolio\",\n  \"description\": \"Updated from Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/ownership-entities/{{ownershipEntityId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "ownership-entities",
+                "{{ownershipEntityId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Ownership Entity",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/ownership-entities/{{ownershipEntityId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "ownership-entities",
+                "{{ownershipEntityId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 - Landlord Property Flow",
+      "item": [
+        {
+          "name": "Add New Property - Full Form",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Property request completed', function () {",
+                  "  pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "  const body = pm.response.json();",
+                  "  const property = body.data && (body.data.property || body.data);",
+                  "  const id = property && (property.id || property._id);",
+                  "  if (id) pm.environment.set('propertyId', id);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "propertyImage",
+                  "type": "file",
+                  "src": [],
+                  "description": "Optional JPEG, PNG, or WebP image; maximum 5 MB"
+                },
+                {
+                  "key": "propertyName",
+                  "value": "Sunset Apartments",
+                  "type": "text"
+                },
+                {
+                  "key": "propertyType",
+                  "value": "flat_apartment",
+                  "type": "text"
+                },
+                {
+                  "key": "tenure",
+                  "value": "leasehold",
+                  "type": "text"
+                },
+                {
+                  "key": "squareFeet",
+                  "value": "980",
+                  "type": "text"
+                },
+                {
+                  "key": "epcRating",
+                  "value": "B",
+                  "type": "text"
+                },
+                {
+                  "key": "bedrooms",
+                  "value": "2",
+                  "type": "text"
+                },
+                {
+                  "key": "bathrooms",
+                  "value": "2",
+                  "type": "text"
+                },
+                {
+                  "key": "streetAddress",
+                  "value": "123 Property Lane",
+                  "type": "text"
+                },
+                {
+                  "key": "city",
+                  "value": "London",
+                  "type": "text"
+                },
+                {
+                  "key": "county",
+                  "value": "Greater London",
+                  "type": "text"
+                },
+                {
+                  "key": "postcode",
+                  "value": "SW1A 1AA",
+                  "type": "text"
+                },
+                {
+                  "key": "ownershipEntity",
+                  "value": "{{ownershipEntityId}}",
+                  "type": "text"
+                },
+                {
+                  "key": "ownershipType",
+                  "value": "personal",
+                  "type": "text"
+                },
+                {
+                  "key": "ownershipPercentage",
+                  "value": "100",
+                  "type": "text"
+                },
+                {
+                  "key": "purchaseDate",
+                  "value": "2025-03-15",
+                  "type": "text"
+                },
+                {
+                  "key": "purchasePrice",
+                  "value": "350000",
+                  "type": "text"
+                },
+                {
+                  "key": "monthlyMortgagePayment",
+                  "value": "1450",
+                  "type": "text"
+                },
+                {
+                  "key": "stampDutyLandTax",
+                  "value": "7500",
+                  "type": "text"
+                },
+                {
+                  "key": "legalFees",
+                  "value": "1800",
+                  "type": "text"
+                },
+                {
+                  "key": "agentFees",
+                  "value": "2500",
+                  "type": "text"
+                },
+                {
+                  "key": "initialRefurbishment",
+                  "value": "12000",
+                  "type": "text"
+                },
+                {
+                  "key": "managementFeePercentage",
+                  "value": "8.5",
+                  "type": "text"
+                },
+                {
+                  "key": "agentName",
+                  "value": "Alex Morgan",
+                  "type": "text"
+                },
+                {
+                  "key": "agentPhone",
+                  "value": "+44 20 7946 0958",
+                  "type": "text"
+                },
+                {
+                  "key": "agentEmail",
+                  "value": "alex@example.com",
+                  "type": "text"
+                },
+                {
+                  "key": "companyAgencyName",
+                  "value": "London Property Management",
+                  "type": "text"
+                },
+                {
+                  "key": "insuranceProvider",
+                  "value": "Example Insurance",
+                  "type": "text"
+                },
+                {
+                  "key": "policyNumber",
+                  "value": "POL-123456",
+                  "type": "text"
+                },
+                {
+                  "key": "annualPremium",
+                  "value": "850",
+                  "type": "text"
+                },
+                {
+                  "key": "coverageAmount",
+                  "value": "500000",
+                  "type": "text"
+                },
+                {
+                  "key": "insuranceStartDate",
+                  "value": "2025-03-15",
+                  "type": "text"
+                },
+                {
+                  "key": "renewalDate",
+                  "value": "2026-03-15",
+                  "type": "text"
+                },
+                {
+                  "key": "propertyNotes",
+                  "value": "Two-bedroom flat near the station.",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{apiBase}}/properties",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Property - JSON Minimal",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Property request completed', function () {",
+                  "  pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "  const body = pm.response.json();",
+                  "  const property = body.data && (body.data.property || body.data);",
+                  "  const id = property && (property.id || property._id);",
+                  "  if (id) pm.environment.set('propertyId', id);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"propertyName\": \"Minimal Property\",\n  \"propertyType\": \"flat_apartment\",\n  \"tenure\": \"leasehold\",\n  \"streetAddress\": \"123 Property Lane\",\n  \"city\": \"London\",\n  \"postcode\": \"SW1A 1AA\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/properties",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List My Properties",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/properties?page=1&limit=10",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties?page=1&limit=10"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Marketplace Property Dropdown",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/properties/mine",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "mine"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Property Summary",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/properties/summary",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "summary"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Property",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Current Tenants",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}/current-tenants",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}",
+                "current-tenants"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Property",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Property request completed', function () {",
+                  "  pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "  const body = pm.response.json();",
+                  "  const property = body.data && (body.data.property || body.data);",
+                  "  const id = property && (property.id || property._id);",
+                  "  if (id) pm.environment.set('propertyId', id);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "propertyName",
+                  "value": "Updated Sunset Apartments",
+                  "type": "text"
+                },
+                {
+                  "key": "propertyImage",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add Unit",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unitNumber\": \"A1\",\n  \"floor\": \"1\",\n  \"bedrooms\": 2,\n  \"bathrooms\": 1,\n  \"squareFeet\": 650,\n  \"rentAmount\": 1500,\n  \"totalParkingSpots\": 1,\n  \"notes\": \"Front-facing unit\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}/units",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}",
+                "units"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Unit",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}/units/{{unitId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}",
+                "units",
+                "{{unitId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Property",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 - Property Expenses",
+      "item": [
+        {
+          "name": "Create Expense",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Plumbing repair\",\n  \"category\": \"maintenance\",\n  \"amount\": 120,\n  \"date\": \"2026-08-15\",\n  \"vendor\": \"Local Plumber\",\n  \"notes\": \"Kitchen sink repair\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}/expenses",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}",
+                "expenses"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Expenses",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}/expenses?page=1&limit=10",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}",
+                "expenses?page=1&limit=10"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Expense Report",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}/expenses/report?year=2026",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}",
+                "expenses",
+                "report?year=2026"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Expense",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}/expenses/{{expenseId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}",
+                "expenses",
+                "{{expenseId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Expense",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 150,\n  \"notes\": \"Updated cost\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}/expenses/{{expenseId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}",
+                "expenses",
+                "{{expenseId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Expense",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}/expenses/{{expenseId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}",
+                "expenses",
+                "{{expenseId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 - Property Contacts",
+      "item": [
+        {
+          "name": "Create Property Contact",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Electrician\",\n  \"profession\": \"electrician\",\n  \"phone\": \"+447700900111\",\n  \"email\": \"john@example.com\",\n  \"notes\": \"Preferred contractor\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}/contacts",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}",
+                "contacts"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Property Contacts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}/contacts",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}",
+                "contacts"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Property Contact",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}/contacts/{{contactId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}",
+                "contacts",
+                "{{contactId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Property Contact",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"notes\": \"Updated note\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}/contacts/{{contactId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}",
+                "contacts",
+                "{{contactId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Property Contact",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}/contacts/{{contactId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}",
+                "contacts",
+                "{{contactId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "07 - Contacts",
+      "item": [
+        {
+          "name": "Create Contact",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Electrician\",\n  \"profession\": \"electrician\",\n  \"phone\": \"+447700900111\",\n  \"email\": \"john@example.com\",\n  \"company\": \"John Repairs Ltd\",\n  \"notes\": \"General contact\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/contacts",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "contacts"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Contacts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/contacts?page=1&limit=10",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "contacts?page=1&limit=10"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Contacts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/contacts?search=electric",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "contacts?search=electric"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Contact Stats",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/contacts/stats",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "contacts",
+                "stats"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Contact",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/contacts/{{contactId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "contacts",
+                "{{contactId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Contact",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"notes\": \"Updated contact\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/contacts/{{contactId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "contacts",
+                "{{contactId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Contact",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/contacts/{{contactId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "contacts",
+                "{{contactId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "08 - Tenant & Lease Flow",
+      "item": [
+        {
+          "name": "Invite Tenant",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"propertyId\": \"{{propertyId}}\",\n  \"unitId\": \"{{unitId}}\",\n  \"firstName\": \"Postman\",\n  \"lastName\": \"Tenant\",\n  \"email\": \"{{tenantEmail}}\",\n  \"rentAmount\": 1500,\n  \"leaseStartDate\": \"2026-09-01\",\n  \"leaseEndDate\": \"2027-08-31\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/tenants/invite",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "invite"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Lease Preview",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tenants/lease-preview/{{leaseId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "lease-preview",
+                "{{leaseId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Accept Invitation",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Postman\",\n  \"lastName\": \"Tenant\",\n  \"password\": \"{{tenantPassword}}\",\n  \"confirmPassword\": \"{{tenantPassword}}\",\n  \"termsAccepted\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/tenants/accept-invitation/{{leaseId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "accept-invitation",
+                "{{leaseId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "My Lease",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tenants/my-lease",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "my-lease"
+              ]
+            }
+          }
+        },
+        {
+          "name": "My Property Documents",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tenants/my-property/documents",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "my-property",
+                "documents"
+              ]
+            }
+          }
+        },
+        {
+          "name": "My Tenants",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tenants/my-tenants",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "my-tenants"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Tenant Lease",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rentAmount\": 1550,\n  \"leaseEndDate\": \"2027-09-30\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/tenants/{{leaseId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "{{leaseId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Resend Invitation",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tenants/{{leaseId}}/resend-invitation",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "{{leaseId}}",
+                "resend-invitation"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Tenant Lease",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tenants/{{leaseId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "{{leaseId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Unit Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tenants/properties/{{propertyId}}/units/{{unitId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "properties",
+                "{{propertyId}}",
+                "units",
+                "{{unitId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Parking Bays",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"totalParkingSpots\": 1,\n  \"parkingBays\": [\n    {\n      \"bayNumber\": \"P1\",\n      \"assignedTo\": \"{{leaseId}}\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/tenants/properties/{{propertyId}}/units/{{unitId}}/parking",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "properties",
+                "{{propertyId}}",
+                "units",
+                "{{unitId}}",
+                "parking"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Allocate Parking Bay",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bayNumber\": \"P1\",\n  \"leaseId\": \"{{leaseId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/tenants/properties/{{propertyId}}/units/{{unitId}}/parking/allocate",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "properties",
+                "{{propertyId}}",
+                "units",
+                "{{unitId}}",
+                "parking",
+                "allocate"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Release Parking Bay",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bayNumber\": \"P1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/tenants/properties/{{propertyId}}/units/{{unitId}}/parking/release",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "properties",
+                "{{propertyId}}",
+                "units",
+                "{{unitId}}",
+                "parking",
+                "release"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "09 - Monthly Bills",
+      "item": [
+        {
+          "name": "Add Bill",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billType\": \"electricity\",\n  \"amount\": 120,\n  \"billingMonth\": \"2026-08\",\n  \"dueDate\": \"2026-08-31\",\n  \"notes\": \"August bill\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/monthly-bills",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "monthly-bills"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Bills",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/monthly-bills?page=1&limit=10",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "monthly-bills?page=1&limit=10"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Bill",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/monthly-bills/{{billId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "monthly-bills",
+                "{{billId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Bill",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 125,\n  \"notes\": \"Updated bill\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/monthly-bills/{{billId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "monthly-bills",
+                "{{billId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Bill Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"paid\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/monthly-bills/{{billId}}/status",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "monthly-bills",
+                "{{billId}}",
+                "status"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Bill",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/monthly-bills/{{billId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "monthly-bills",
+                "{{billId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "10 - Rent Payments",
+      "item": [
+        {
+          "name": "Tenant Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tenants/rent-payments/dashboard",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "rent-payments",
+                "dashboard"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Tenant List Payments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tenants/rent-payments",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "rent-payments"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Tenant Get Payment",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tenants/rent-payments/{{paymentId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "rent-payments",
+                "{{paymentId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Payment Intent",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentMethod\": \"card\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/tenants/rent-payments/{{paymentId}}/pay",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "rent-payments",
+                "{{paymentId}}",
+                "pay"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Mock Payment Success",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tenants/rent-payments/{{paymentId}}/pay-mock",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "rent-payments",
+                "{{paymentId}}",
+                "pay-mock"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Apple Pay Config",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tenants/rent-payments/apple-pay/config",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "rent-payments",
+                "apple-pay",
+                "config"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Apple Pay Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"{{applePayToken}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/tenants/rent-payments/{{paymentId}}/pay/apple-pay",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "rent-payments",
+                "{{paymentId}}",
+                "pay",
+                "apple-pay"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Rent Notifications",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tenants/rent-payments/notifications",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "rent-payments",
+                "notifications"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Mark Rent Notification Read",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tenants/rent-payments/notifications/{{notificationId}}/read",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "rent-payments",
+                "notifications",
+                "{{notificationId}}",
+                "read"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Register Device Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"{{deviceToken}}\",\n  \"platform\": \"ios\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/tenants/rent-payments/device-token",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "rent-payments",
+                "device-token"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Auto Pay",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tenants/rent-payments/auto-pay",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "rent-payments",
+                "auto-pay"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Setup Auto Pay",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentMethodId\": \"{{paymentMethodId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/tenants/rent-payments/auto-pay/setup",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "rent-payments",
+                "auto-pay",
+                "setup"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Confirm Auto Pay Setup",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"setupIntentId\": \"{{setupIntentId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/tenants/rent-payments/auto-pay/confirm",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "rent-payments",
+                "auto-pay",
+                "confirm"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Auto Pay",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enabled\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/tenants/rent-payments/auto-pay",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tenants",
+                "rent-payments",
+                "auto-pay"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Landlord Payment Summary",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/landlord/rent-payments/summary",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "landlord",
+                "rent-payments",
+                "summary"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Landlord Monthly Report",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/landlord/rent-payments/report?month=2026-08",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "landlord",
+                "rent-payments",
+                "report?month=2026-08"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Generate Bills",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"month\": \"2026-08\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/landlord/rent-payments/generate-bills",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "landlord",
+                "rent-payments",
+                "generate-bills"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Register Apple Pay Domain",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"domainName\": \"example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/landlord/rent-payments/apple-pay/register-domain",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "landlord",
+                "rent-payments",
+                "apple-pay",
+                "register-domain"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Manual Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"leaseId\": \"{{leaseId}}\",\n  \"amount\": 1500,\n  \"paidAt\": \"2026-08-15\",\n  \"method\": \"bank_transfer\",\n  \"notes\": \"Manual payment\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/landlord/rent-payments/manual",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "landlord",
+                "rent-payments",
+                "manual"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Landlord Payments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/landlord/rent-payments?page=1&limit=10",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "landlord",
+                "rent-payments?page=1&limit=10"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Manual Payment",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"paid\",\n  \"notes\": \"Updated manually\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/landlord/rent-payments/{{paymentId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "landlord",
+                "rent-payments",
+                "{{paymentId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "11 - Maintenance Requests",
+      "item": [
+        {
+          "name": "Submit Request",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "photos",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "propertyId",
+                  "value": "{{propertyId}}",
+                  "type": "text"
+                },
+                {
+                  "key": "unitId",
+                  "value": "{{unitId}}",
+                  "type": "text"
+                },
+                {
+                  "key": "title",
+                  "value": "Leaking tap",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Kitchen tap is leaking",
+                  "type": "text"
+                },
+                {
+                  "key": "priority",
+                  "value": "medium",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{apiBase}}/maintenance-requests",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "maintenance-requests"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Requests",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/maintenance-requests?page=1&limit=10",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "maintenance-requests?page=1&limit=10"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Request",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/maintenance-requests/{{requestId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "maintenance-requests",
+                "{{requestId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Request Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"in_progress\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/maintenance-requests/{{requestId}}/status",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "maintenance-requests",
+                "{{requestId}}",
+                "status"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add Request Comment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Technician scheduled.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/maintenance-requests/{{requestId}}/comments",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "maintenance-requests",
+                "{{requestId}}",
+                "comments"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Request",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/maintenance-requests/{{requestId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "maintenance-requests",
+                "{{requestId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "12 - Complaints",
+      "item": [
+        {
+          "name": "Submit Complaint",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"propertyId\": \"{{propertyId}}\",\n  \"title\": \"Noise issue\",\n  \"description\": \"Loud noise after midnight\",\n  \"category\": \"noise\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/complaints",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "complaints"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Complaints",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/complaints?page=1&limit=10",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "complaints?page=1&limit=10"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Complaint",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/complaints/{{complaintId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "complaints",
+                "{{complaintId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Complaint Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"resolved\",\n  \"landlordResponse\": \"Issue handled.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/complaints/{{complaintId}}/status",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "complaints",
+                "{{complaintId}}",
+                "status"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Complaint",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/complaints/{{complaintId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "complaints",
+                "{{complaintId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "13 - Documents",
+      "item": [
+        {
+          "name": "Upload Global Document",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "document",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "title",
+                  "value": "Insurance Certificate",
+                  "type": "text"
+                },
+                {
+                  "key": "category",
+                  "value": "insurance",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{apiBase}}/documents",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "documents"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Global Documents",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/documents?page=1&limit=10",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "documents?page=1&limit=10"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Global Document",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/documents/{{documentId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "documents",
+                "{{documentId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Upload Property Document",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "document",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "title",
+                  "value": "Gas Safety Certificate",
+                  "type": "text"
+                },
+                {
+                  "key": "category",
+                  "value": "gas_safety",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}/documents",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}",
+                "documents"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Property Documents",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}/documents",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}",
+                "documents"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Property Document",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}/documents/{{documentId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}",
+                "documents",
+                "{{documentId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Property Document",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/properties/{{propertyId}}/documents/{{documentId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "properties",
+                "{{propertyId}}",
+                "documents",
+                "{{documentId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "14 - Tasks",
+      "item": [
+        {
+          "name": "Create Task",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Book inspection\",\n  \"description\": \"Annual property inspection\",\n  \"priority\": \"medium\",\n  \"dueDate\": \"2026-09-01\",\n  \"propertyId\": \"{{propertyId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/tasks",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tasks"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Tasks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tasks?page=1&limit=10",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tasks?page=1&limit=10"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Task Stats",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tasks/stats",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tasks",
+                "stats"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Tasks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tasks/search?q=inspection",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tasks",
+                "search?q=inspection"
+              ]
+            }
+          }
+        },
+        {
+          "name": "AI Task Suggestions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tasks/ai-suggestions",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tasks",
+                "ai-suggestions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Task",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tasks/{{taskId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tasks",
+                "{{taskId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Task",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"in_progress\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/tasks/{{taskId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tasks",
+                "{{taskId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Complete Task",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tasks/{{taskId}}/complete",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tasks",
+                "{{taskId}}",
+                "complete"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Task",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/tasks/{{taskId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "tasks",
+                "{{taskId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "15 - Chat",
+      "item": [
+        {
+          "name": "List Conversations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/chat/conversations",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "chat",
+                "conversations"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Direct Conversation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"participantId\": \"{{userId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/chat/conversations/direct",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "chat",
+                "conversations",
+                "direct"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Group Conversation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Property Team\",\n  \"memberIds\": [\n    \"{{userId}}\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/chat/conversations/group",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "chat",
+                "conversations",
+                "group"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Support Conversation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subject\": \"Need help\",\n  \"message\": \"Hello support\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/chat/conversations/support",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "chat",
+                "conversations",
+                "support"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Tenant Default Conversation",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/chat/tenant/default-conversation",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "chat",
+                "tenant",
+                "default-conversation"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Conversation",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/chat/conversations/{{conversationId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "chat",
+                "conversations",
+                "{{conversationId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Conversation",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Conversation\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/chat/conversations/{{conversationId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "chat",
+                "conversations",
+                "{{conversationId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Archive Conversation",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/chat/conversations/{{conversationId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "chat",
+                "conversations",
+                "{{conversationId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Manage Members",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"add\",\n  \"memberIds\": [\n    \"{{userId}}\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/chat/conversations/{{conversationId}}/members",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "chat",
+                "conversations",
+                "{{conversationId}}",
+                "members"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Messages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/chat/conversations/{{conversationId}}/messages",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "chat",
+                "conversations",
+                "{{conversationId}}",
+                "messages"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Send Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Hello from Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/chat/conversations/{{conversationId}}/messages",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "chat",
+                "conversations",
+                "{{conversationId}}",
+                "messages"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Mark Conversation Read",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/chat/conversations/{{conversationId}}/read",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "chat",
+                "conversations",
+                "{{conversationId}}",
+                "read"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Edit Message",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Updated message\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/chat/messages/{{messageId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "chat",
+                "messages",
+                "{{messageId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Message",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/chat/messages/{{messageId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "chat",
+                "messages",
+                "{{messageId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add Reaction",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emoji\": \"like\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/chat/messages/{{messageId}}/reactions",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "chat",
+                "messages",
+                "{{messageId}}",
+                "reactions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Remove Reaction",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/chat/messages/{{messageId}}/reactions",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "chat",
+                "messages",
+                "{{messageId}}",
+                "reactions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Media Upload URL",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fileName\": \"photo.png\",\n  \"contentType\": \"image/png\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/chat/media/upload-url",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "chat",
+                "media",
+                "upload-url"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Confirm Media Upload",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"{{mediaKey}}\",\n  \"url\": \"{{mediaUrl}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/chat/media/confirm",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "chat",
+                "media",
+                "confirm"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "16 - Marketplace",
+      "item": [
+        {
+          "name": "Browse Listings",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/marketplace/listings?page=1&limit=10",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "marketplace",
+                "listings?page=1&limit=10"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Browse Joint Ventures",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/marketplace/joint-ventures?page=1&limit=10",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "marketplace",
+                "joint-ventures?page=1&limit=10"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Listing",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/marketplace/listings/{{listingId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "marketplace",
+                "listings",
+                "{{listingId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Marketplace Upload URL",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fileName\": \"property.png\",\n  \"contentType\": \"image/png\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/marketplace/media/upload-url",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "marketplace",
+                "media",
+                "upload-url"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Estimate Valuation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"postcode\": \"SW1A 1AA\",\n  \"propertyType\": \"flat_apartment\",\n  \"bedrooms\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/marketplace/valuations/estimate",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "marketplace",
+                "valuations",
+                "estimate"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Toggle Saved Item",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/marketplace/saved/{{listingId}}?type=listing",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "marketplace",
+                "saved",
+                "{{listingId}}?type=listing"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Listing Inquiry",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"I am interested in this listing.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/marketplace/listings/{{listingId}}/inquiry",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "marketplace",
+                "listings",
+                "{{listingId}}",
+                "inquiry"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Portfolio Listing",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "propertyId",
+                  "value": "{{propertyId}}",
+                  "type": "text"
+                },
+                {
+                  "key": "title",
+                  "value": "Portfolio Listing",
+                  "type": "text"
+                },
+                {
+                  "key": "askingPrice",
+                  "value": "450000",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{apiBase}}/marketplace/listings/portfolio",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "marketplace",
+                "listings",
+                "portfolio"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create New Property Listing",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "title",
+                  "value": "New Property Opportunity",
+                  "type": "text"
+                },
+                {
+                  "key": "postcode",
+                  "value": "SW1A 1AA",
+                  "type": "text"
+                },
+                {
+                  "key": "askingPrice",
+                  "value": "450000",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{apiBase}}/marketplace/listings/new-property",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "marketplace",
+                "listings",
+                "new-property"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Joint Venture",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "title",
+                  "value": "Joint Venture Project",
+                  "type": "text"
+                },
+                {
+                  "key": "targetRaise",
+                  "value": "100000",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{apiBase}}/marketplace/joint-ventures",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "marketplace",
+                "joint-ventures"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Listing",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "Updated Listing",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{apiBase}}/marketplace/listings/{{listingId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "marketplace",
+                "listings",
+                "{{listingId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Listing",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/marketplace/listings/{{listingId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "marketplace",
+                "listings",
+                "{{listingId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Joint Venture",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "Updated JV",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{apiBase}}/marketplace/joint-ventures/{{jointVentureId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "marketplace",
+                "joint-ventures",
+                "{{jointVentureId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Joint Venture",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/marketplace/joint-ventures/{{jointVentureId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "marketplace",
+                "joint-ventures",
+                "{{jointVentureId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "17 - Billing",
+      "item": [
+        {
+          "name": "List Plans",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/billing/plans",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "billing",
+                "plans"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Subscription",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/billing/subscription",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "billing",
+                "subscription"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Usage",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/billing/usage",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "billing",
+                "usage"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Checkout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"planId\": \"pro\",\n  \"successUrl\": \"https://example.com/success\",\n  \"cancelUrl\": \"https://example.com/cancel\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/billing/checkout",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "billing",
+                "checkout"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Portal",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"returnUrl\": \"https://example.com/account\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/billing/portal",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "billing",
+                "portal"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Downgrade Plan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"planId\": \"free\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/billing/downgrade",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "billing",
+                "downgrade"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Billing Info",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billingEmail\": \"{{landlordEmail}}\",\n  \"billingAddress\": \"123 Billing Street, London\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/billing/info",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "billing",
+                "info"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Invoices",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/billing/invoices?page=1&limit=10",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "billing",
+                "invoices?page=1&limit=10"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Invoice",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/billing/invoices/{{invoiceId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "billing",
+                "invoices",
+                "{{invoiceId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "18 - Team & Permissions",
+      "item": [
+        {
+          "name": "Accept Team Invite",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"{{teamInviteToken}}\",\n  \"password\": \"{{landlordPassword}}\",\n  \"confirmPassword\": \"{{landlordPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/team/members/accept-invite",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "team",
+                "members",
+                "accept-invite"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Permissions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/team/permissions",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "team",
+                "permissions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Roles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/team/roles",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "team",
+                "roles"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Role",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Property Manager\",\n  \"permissions\": [\n    \"prop_view\",\n    \"prop_edit\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/team/roles",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "team",
+                "roles"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Role",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Senior Property Manager\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/team/roles/{{roleId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "team",
+                "roles",
+                "{{roleId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Role",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/team/roles/{{roleId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "team",
+                "roles",
+                "{{roleId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Members",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/team/members",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "team",
+                "members"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Invite Member",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{memberEmail}}\",\n  \"roleId\": \"{{roleId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/team/members/invite",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "team",
+                "members",
+                "invite"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Member Role",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roleId\": \"{{roleId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/team/members/{{memberId}}/role",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "team",
+                "members",
+                "{{memberId}}",
+                "role"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Remove Member",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/team/members/{{memberId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "team",
+                "members",
+                "{{memberId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Project Members",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/team/projects/{{projectId}}/members",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "team",
+                "projects",
+                "{{projectId}}",
+                "members"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Assign Project Member",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"memberId\": \"{{memberId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/team/projects/{{projectId}}/members",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "team",
+                "projects",
+                "{{projectId}}",
+                "members"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Remove Project Member",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/team/projects/{{projectId}}/members/{{memberId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "team",
+                "projects",
+                "{{projectId}}",
+                "members",
+                "{{memberId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "19 - Calculators",
+      "item": [
+        {
+          "name": "Get Shared Calculation",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/calculators/shared/{{shareToken}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "calculators",
+                "shared",
+                "{{shareToken}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Save Calculation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Stamp Duty Scenario\",\n  \"type\": \"stamp_duty\",\n  \"input\": {\n    \"price\": 350000\n  },\n  \"result\": {\n    \"tax\": 7500\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/calculators",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "calculators"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Saved Calculations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/calculators",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "calculators"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Calculation",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Scenario\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/calculators/{{calculationId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "calculators",
+                "{{calculationId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Calculation",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/calculators/{{calculationId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "calculators",
+                "{{calculationId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Enable Sharing",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/calculators/{{calculationId}}/share",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "calculators",
+                "{{calculationId}}",
+                "share"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Disable Sharing",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/calculators/{{calculationId}}/share",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "calculators",
+                "{{calculationId}}",
+                "share"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "20 - Stamp Duty",
+      "item": [
+        {
+          "name": "Get Active Rates",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/stamp-duty/rates/active",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "stamp-duty",
+                "rates",
+                "active"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Rate Proposal",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"effectiveFrom\": \"2026-09-01\",\n  \"rates\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/stamp-duty/rates",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "stamp-duty",
+                "rates"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All Rate Sets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/stamp-duty/rates",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "stamp-duty",
+                "rates"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Approve Proposal",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/stamp-duty/rates/{{rateSetId}}/approve",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "stamp-duty",
+                "rates",
+                "{{rateSetId}}",
+                "approve"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Revert Active Rate",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/stamp-duty/rates/{{rateSetId}}/revert",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "stamp-duty",
+                "rates",
+                "{{rateSetId}}",
+                "revert"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "21 - AI",
+      "item": [
+        {
+          "name": "AI Chat",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Summarize my property portfolio\",\n  \"includeNews\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/ai/chat",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "ai",
+                "chat"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Transcribe Audio",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"audioBase64\": \"{{audioBase64}}\",\n  \"mimeType\": \"audio/webm\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/ai/transcribe",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "ai",
+                "transcribe"
+              ]
+            }
+          }
+        },
+        {
+          "name": "CGT Rates",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/ai/tax-rates/cgt",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "ai",
+                "tax-rates",
+                "cgt"
+              ]
+            }
+          }
+        },
+        {
+          "name": "IHT Rates",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/ai/tax-rates/iht",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "ai",
+                "tax-rates",
+                "iht"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "22 - Property Alerts",
+      "item": [
+        {
+          "name": "Create Alert Config",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"propertyId\": \"{{propertyId}}\",\n  \"type\": \"gas_safety\",\n  \"enabled\": true,\n  \"leadDays\": 30\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/property-alerts/configs",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "property-alerts",
+                "configs"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Alert Configs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/property-alerts/configs",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "property-alerts",
+                "configs"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Toggle Alert Config",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/property-alerts/configs/{{alertConfigId}}/toggle",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "property-alerts",
+                "configs",
+                "{{alertConfigId}}",
+                "toggle"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Send Live Notification",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"propertyId\": \"{{propertyId}}\",\n  \"title\": \"Reminder\",\n  \"message\": \"Certificate expiring soon\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBase}}/property-alerts/notifications/send-live",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "property-alerts",
+                "notifications",
+                "send-live"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Notifications",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/property-alerts/notifications",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "property-alerts",
+                "notifications"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Mark Notification Read",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/property-alerts/notifications/{{notificationId}}/read",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "property-alerts",
+                "notifications",
+                "{{notificationId}}",
+                "read"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Notification",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/property-alerts/notifications/{{notificationId}}",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "property-alerts",
+                "notifications",
+                "{{notificationId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "23 - Landlord Dashboard",
+      "item": [
+        {
+          "name": "Portfolio Overview",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBase}}/landlord/portfolio-overview",
+              "host": [
+                "{{apiBase}}"
+              ],
+              "path": [
+                "landlord",
+                "portfolio-overview"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
